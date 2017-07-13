@@ -25,25 +25,25 @@ public class NewTest1 {
 	JSONObject obj1 = null;
 	String id, id1;
 	
-  @Test
+  @Test(priority = 2)
   public void f() {
 	  response = given().get("http://10.0.1.86/snl/rest/v1/board.json");
 	  Assert.assertEquals(response.statusCode(), 200);
   }
-  @Test
+  @Test(priority = 1)
   public void create(){
 	  response = given().get("http://10.0.1.86/snl/rest/v1/board/new.json");
 	  Assert.assertEquals(response.statusCode(), 200);
   }
-  @Test
+  @Test(priority = 5)
   public void details(){
 	  response = given().get("http://10.0.1.86/snl/rest/v1/board/4000.json");  
 	  Assert.assertEquals(response.statusCode(), 200);
-	  //given().put("http://10.0.1.86/snl/rest/v1/board/4000.json"); 
-	 // given().delete("http://10.0.1.86/snl/rest/v1/board/3653.json");
+	  given().put("http://10.0.1.86/snl/rest/v1/board/4000.json"); 
+	  given().delete("http://10.0.1.86/snl/rest/v1/board/3653.json");
 	  
   }
-  @Test
+  @Test(priority = 3)
  public void createNewPlayer() throws FileNotFoundException, IOException, ParseException{
 		
 				obj =  (JSONObject) parser.parse(new FileReader("C:\\Users\\arpitbajpai\\Downloads\\workspace\\assignment-snl-services\\db.json"));
@@ -64,7 +64,7 @@ public class NewTest1 {
 	 //System.out.println(response.asString());
 
   }
-  @Test
+  @Test(priority = 4)
   public void movePlayer(){
 	  response = given().get("http://10.0.1.86/snl/rest/v1/move/4000.json?player_id=519");
 	  Assert.assertEquals(response.statusCode(), 200);
